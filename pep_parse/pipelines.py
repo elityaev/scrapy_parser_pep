@@ -1,6 +1,9 @@
 import datetime as dt
+from pathlib import Path
 
-from pep_parse.settings import BASE_DIR, RESULTS_DIR
+
+BASE_DIR = Path(__file__).parents[1]
+RESULTS_DIR = 'results'
 
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 
@@ -29,7 +32,7 @@ class PepParsePipeline():
         now_formatted = now.strftime(DATETIME_FORMAT)
         total = 0
         with open(
-                f'{RESULTS_DIR}/status_summary_{now_formatted}.csv',
+                f'{self.results_dir}/status_summary_{now_formatted}.csv',
                 mode='w',
                 encoding='utf-8'
         ) as f:
