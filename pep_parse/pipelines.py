@@ -1,16 +1,14 @@
 import datetime as dt
+
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).parents[1]
-# если формировать адрес RESULTS_DIR от BASE_DIR, то тест не проходит
-RESULTS_DIR = Path(__file__).parents[1] / 'results'
-
+RESULTS_DIR = BASE_DIR / 'results'
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 
 
 class PepParsePipeline():
-
     def __init__(self):
         self.results_dir = RESULTS_DIR
         self.results_dir.mkdir(exist_ok=True)
