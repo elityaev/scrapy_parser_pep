@@ -3,7 +3,8 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).parents[1]
-RESULTS_DIR = BASE_DIR / 'results'
+# если формировать адрес RESULTS_DIR от BASE_DIR, то тест не проходит
+RESULTS_DIR = Path(__file__).parents[1] / 'results'
 
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 
