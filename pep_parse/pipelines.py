@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).parents[1]
-RESULTS_DIR = 'results'
+RESULTS_DIR = BASE_DIR / 'results'
 
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 
@@ -11,7 +11,7 @@ DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 class PepParsePipeline():
 
     def __init__(self):
-        self.results_dir = BASE_DIR / RESULTS_DIR
+        self.results_dir = RESULTS_DIR
         self.results_dir.mkdir(exist_ok=True)
 
     def open_spider(self, spider):
@@ -19,15 +19,10 @@ class PepParsePipeline():
 
     def process_item(self, item, spider):
         status = item['status']
-        if status not in self.results_data:
-            self.results_data[status] = 1
-        else:
-            self.results_data[status] += 1
-        print(self.results_data)
+        self.results_data[status] = self.results_data.get(status, 0) + 1
         return item
 
     def close_spider(self, spider):
-        print(self.results_data)
         now = dt.datetime.now()
         now_formatted = now.strftime(DATETIME_FORMAT)
         total = 0
