@@ -4,10 +4,15 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).parents[1]
+RESULT_DIR = BASE_DIR / 'results'
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 
 
 class PepParsePipeline():
+
+    def __init__(self) -> None:
+        self.results_dir = RESULT_DIR
+        self.results_dir.mkdir(exist_ok=True)
 
     def open_spider(self, spider):
         self.results_data = {}
@@ -22,7 +27,7 @@ class PepParsePipeline():
         now_formatted = now.strftime(DATETIME_FORMAT)
         total = 0
         with open(
-                f'{BASE_DIR}/results/status_summary_{now_formatted}.csv',
+                f'{RESULT_DIR}/status_summary_{now_formatted}.csv',
                 mode='w',
                 encoding='utf-8'
         ) as f:
