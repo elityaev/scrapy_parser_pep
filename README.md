@@ -8,6 +8,7 @@
 
 
 <h3 align="center">Используемые технологии:</h3>
+
 * Python
 * Scrapy
 
